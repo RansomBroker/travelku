@@ -1,0 +1,437 @@
+/* first line of search */
+
+.z-index-1 {
+    z-index: 1 !important;
+}
+.z-index-2 {
+    z-index: 200 !important;
+}
+
+.z-index-4{
+    z-index: 300 !important;
+}
+
+.start-8 {
+    left: 8px;
+}
+
+.end-8 {
+    right: 8px;
+}
+
+.top-55 {
+    top: 55px;
+}
+
+.content-class {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+
+}
+
+/* end line of flight search*/
+
+#counter-adult,
+#counter-children,
+#counter-infant {
+    width: 30px;
+    text-align: center;
+}
+
+#passenger-selector #selector {
+    z-index: 10;
+    visibility: hidden;
+}
+
+#counter-adult-amadeus,
+#counter-children-amadeus,
+#counter-infant-amadeus {
+    width: 30px;
+    text-align: center;
+}
+
+#passenger-selector-amadeus #selector-amadeus {
+    z-index: 10;
+    visibility: hidden;
+}
+
+#counter-adult-domestic,
+#counter-children-domestic,
+#counter-infant-domestic {
+    width: 30px;
+    text-align: center;
+}
+
+#passenger-selector-domestic #selector-domestic {
+    z-index: 10;
+    visibility: hidden;
+}
+
+
+.misc i {
+    font-size: 50px;
+}
+
+.destination-picker {
+    z-index: 10;
+    top: 90%;
+    right: -2.5%;
+}
+
+.destination-picker li {
+    padding: 0.4rem 0.8rem;
+}
+
+.origin-picker {
+    top: 90%;
+    z-index: 10;
+    right: 0;
+    left: 0;
+}
+
+.origin-picker li {
+    padding: 0.4rem 0.8rem;
+}
+
+#selector {
+    top:40%;
+    left: 0;
+    right: 0;
+}
+
+#selector-amadeus {
+    top:40%;
+    left: 0;
+    right: 0;
+}
+
+#selector-domestic {
+    top:40%;
+    left: 0;
+    right: 0;
+}
+
+.tab-contents {
+    padding: 1rem;
+    border-radius: 0.375rem;
+}
+
+/* .custom-switch {
+
+        background-color: white;
+        border: 0;
+        color: #000;
+        border-radius: 20px;
+        padding: 6px 30px;
+    }
+
+    .custom-switch[aria-selected="true"] {
+        color: #fff;
+
+        background-color: #386abb;
+    } */
+
+
+
+.nav-pills .sabre .nav-link:not(.active) {
+    background-color: #ddd;
+    color: #000;
+}
+
+.nav-pills .amadeus .nav-link:not(.active) {
+    background-color: #ddd;
+    color: #000;
+}
+
+.nav-pills .domestic .nav-link:not(.active) {
+    background-color: #ddd;
+    color: #000;
+}
+
+#slideshow{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+/* active (faded) */
+
+body {
+    min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-height: -webkit-fill-available;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+
+/* active (faded) */
+.nav-pills .sabre .nav-link {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .amadeus .nav-link {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .domestic .nav-link {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .sabre .nav-link.active {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .amadeus .nav-link.active {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .domestic .nav-link.active {
+    background-color: #386abb;
+    color: #ffff;
+}
+
+.nav-pills .nav-item .tabWrapper {
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+    padding: 4px 4px;
+    margin: 2px;
+    text-align: center;
+    font-size:12px;
+}
+
+.nav-pills .nav-item .tabWrapper.active {
+    box-sizing: border-box;
+    background: #055eaa;
+    padding: 4px 4px;
+    margin: 2px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0px 0px 7px grey;
+}
+
+#logo-navbar {
+    width: 100px;
+}
+
+.navbar-link a:hover, .navbar-link a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-link li {
+    margin-left: 20px;
+}
+
+#mobile-menu {
+    right: 0px;
+    top: 0;
+}
+
+.overlay {
+    background: #000000;
+    opacity: 0.4;
+}
+
+#sidebar .content {
+    width: 400px;
+    height: 100vh;
+    z-index: 10;
+    position: absolute;
+    right: -400px;
+    transition: 0.5s ease-in-out;
+}
+
+#close-sidebar {
+    font-size: 20px;
+}
+
+#sidebar {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+@media (max-width: 992px) {
+    #sidebar .content {
+        width:  100%;
+        right: -100%;
+    }
+}
+
+
+.border-tl-r-8 {
+    border-top-left-radius: 8px !important;
+
+}
+.border-br-r-8 {
+    border-bottom-right-radius: 8px !important;
+}
+
+@media only screen and (min-width: 1000px) {
+    .border-tl-r-8 {
+        border-top-left-radius: 16px !important;
+    }
+    .border-br-r-8 {
+        border-bottom-right-radius-radius: 16px !important;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    #selector {
+        top: 58%;
+        /*left: unset;
+        right: unset;*/
+    }
+    #selector-amadeus {
+        top: 58%;
+        /*left: unset;
+        right: unset;*/
+    }
+    #selector-domestic {
+        top: 58%;
+        /*left: unset;
+        right: unset;*/
+    }
+
+    .headerIcon {
+        /* margin-left: -20px; */
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow: auto;
+        white-space: nowrap;
+
+    }
+}
+
+/* PPOB TABS*/
+.nav-pills .ppobTabWrapper {
+    background-color: #fff;
+    border: 3px solid #ddd;
+    margin: 3px;
+    border-radius: 5px;
+    padding: 5px 5px;
+    width: 100%;
+    color: #000;
+}
+
+.nav-pills .ppobTabWrapper.active {
+    background-color: #386abb;
+    border: 3px solid #ddd;
+    margin: 3px;
+    border-radius: 5px;
+    padding: 5px 5px;
+    width: 250px;
+    color: #fff;
+    width: 100%;
+}
+
+.ppobContentTabWrapper{
+    display: block;
+    align-items: flex-start;
+}
+
+/* .tab-content .panePpob{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: blue;
+} */
+
+@media (min-width: 768px) {
+    .ppobContentTabWrapper{
+        display: flex
+    }
+}
+/* EOL PPOB*/
+
+/* center button topup ppob*/
+.top--7 {
+    top: -7px;
+}
+
+.btn-no-style{
+    background: none;
+    border: 0;
+}
+
+
+
+@media only screen and (max-width: 512px) {
+    .fs-small {
+        font-size: 16px;
+    }
+
+    .p-xs-1 {
+        padding: 0.5em !important;
+    }
+}
+
+/* Hotel */
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotelWrapper{
+    padding: 10px 50px;
+}
+
+.kiri {
+    padding-left: 50px;
+    border-right: 1px solid #ddd;
+}
+.kanan {
+    padding-left: 120px;
+    border-left: 1px solid #ddd;
+}
+
+@media (max-width: 1024px) {
+    .headerWrapper {
+        display: block;
+    }
+
+    .hotelWrapper{
+        padding: 0px;
+    }
+
+    .kiri {
+        padding-left: 10px;
+        border-right: 1px solid #ddd;
+    }
+    .kanan {
+        padding-left: 10px;
+        border-left: 1px solid #ddd;
+    }
+}
+/* EOL */
