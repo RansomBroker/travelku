@@ -199,6 +199,7 @@ class Web extends Controller
     /* Hotel */
     public function hotel_search()
     {
+        dd($_GET);
         /*$totalRoom = $_GET['room-count'];
         $checkIn = $_GET['check-in'];
         $checkOut = $_GET['check-out'];

@@ -1,7 +1,6 @@
 const slideShow = () => {
     let imageIndex = 0;
     window.setInterval(() => {
-        console.log(imageIndex);
         const array = ["nusped.jpg", "kabah.jpg", "borobudur.jpg", "turki.jpg"];
 
         imageIndex++;
@@ -9,8 +8,6 @@ const slideShow = () => {
         if (imageIndex >= 3) {
             imageIndex = 0;
         }
-
-        console.log(slideShowUrl + "/" + array[imageIndex]);
 
         $("#slideshow")
             .fadeOut(1000, function () {
@@ -85,10 +82,6 @@ $("#switch-train-destination").click((e) => {
         `[name=train-destination-placeholder]`
     ).val();
 
-    console.log("train origin " + origin);
-    console.log("train oritin placeholder" + originPlaceholder);
-    console.log("train destination" + destination);
-    console.log("train destination place" + destinationPlaceholder);
     $(`[name=train-origin]`).val(destination);
     $(`[name=train-origin-placeholder]`).val(destinationPlaceholder);
     $(`[name=train-destination]`).val(origin);
@@ -102,7 +95,6 @@ const increment = (e) => {
     let childval = parseInt($("[name=children]").val());
     let infantval = parseInt($("[name=infant]").val());
     const total = adultval + childval + infantval;
-    console.log(adultval);
     const target = e.currentTarget.getAttribute("target");
     let value = $(`[name=${target}]`).val();
     value++;
@@ -238,7 +230,6 @@ const incrementAmadeus = (e) => {
     adultval = parseInt($("[name=adult-amadeus]").val());
     childval = parseInt($("[name=children-amadeus]").val());
     infantval = parseInt($("[name=infant-amadeus]").val());
-    console.log(adultval);
     $(`#input-passenger-amadeus`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -353,7 +344,7 @@ const incrementDomestic = (e) => {
     adultval = parseInt($("[name=adult-domestic]").val());
     childval = parseInt($("[name=children-domestic]").val());
     infantval = parseInt($("[name=infant-domestic]").val());
-    console.log(adultval);
+
     $(`#input-passenger-domestic`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -453,14 +444,12 @@ const incrementTrain = (e) => {
         $(`.decrement-train[target=${target}]`).prop("disabled", false);
     }
 
-    console.log(target);
     $(`[name=${target}]`).val(value);
     $(`#counter-${target}`).html(value);
 
     adultval = parseInt($("[name=adult-train]").val());
     childval = parseInt($("[name=children-train]").val());
     infantval = parseInt($("[name=infant-train]").val());
-    console.log(adultval);
     $(`#input-passenger-train`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -554,14 +543,13 @@ const incrementBus = (e) => {
         $(`.decrement-bus[target=${target}]`).prop("disabled", false);
     }
 
-    console.log(target);
     $(`[name=${target}]`).val(value);
     $(`#counter-${target}`).html(value);
 
     adultval = parseInt($("[name=adult-bus]").val());
     childval = parseInt($("[name=children-bus]").val());
     infantval = parseInt($("[name=infant-bus]").val());
-    console.log(adultval);
+
     $(`#input-passenger-bus`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -770,7 +758,6 @@ const showSelectorBus = () => {
 
 /* show selector bus */
 const showSelectorHotel = (e) => {
-    console.log("heloo too");
     e.preventDefault();
     $("#selector-hotel").css("visibility", "visible");
 };
@@ -813,7 +800,6 @@ const hideSelectorBus = (e) => {
 
 /* hide selector hotel*/
 const hideSelectorHotel = (e) => {
-    console.log("Hello");
     e.preventDefault();
     $("#selector-hotel").css("visibility", "hidden");
 };
@@ -904,7 +890,6 @@ const searchBusRoute = async (e, target) => {
     const data = await request.json();
     let html = ``;
 
-    console.log(data.length);
     if (data.length == 0) {
         if (!$(`.${target}-picker`).hasClass("invisible")) {
             $(`.${target}-picker`).addClass("invisible");
@@ -938,7 +923,6 @@ const searchStation = async (e, target) => {
     const data = await response.json();
     let html = ``;
 
-    console.log(data);
     if (data.length == 0) {
         if (!$(`.${target}-picker`).hasClass("invisible")) {
             $(`.${target}-picker`).addClass("invisible");
@@ -970,7 +954,38 @@ const searchStation = async (e, target) => {
 };
 
 const searchCity = async (e, target) => {
+    const url = location.origin + "/api/hotel/city/search";
+    const response = await fetch(`${url}/${e.currentTarget.value}`);
+    const data = await response.json();
+    let html = ``;
 
+    if (data.length == 0) {
+        if (!$(`.${target}-picker`).hasClass("invisible")) {
+            $(`.${target}-picker`).addClass("invisible");
+        }
+    } else {
+        if ($(`.${target}-picker`).hasClass("invisible")) {
+            $(`.${target}-picker`).removeClass("invisible");
+        }
+    }
+
+    data.forEach((item) => {
+        html += `
+		<li code="${item.city_id}" text="${item.city_name}">
+			<h6 class="mb-1">${item.city_name}</h6>
+		</li>
+		`;
+    });
+
+    $(`.${target}-picker ul`).html(html);
+
+    $(`.${target}-picker li`).click((e) => {
+        const code = e.currentTarget.getAttribute("code");
+        const text = e.currentTarget.getAttribute("text");
+        $(`[name=${target}]`).val(code);
+        $(`[name=${target}-placeholder]`).val(text);
+        $(`.${target}-picker`).addClass("invisible");
+    });
 };
 
 /* sabre-handle */
@@ -1142,6 +1157,10 @@ $("#bus-destination").focus(function () {
     $(this).val("");
 });
 
+$("#place-input").focus(function () {
+    $(this).val("");
+});
+
 /* train aditional */
 $("[name=train-origin-placeholder]").blur(() => {
     $("[name=train-origin-placeholder]").val("Jakarta, Gambir (GMR)");
@@ -1158,6 +1177,18 @@ $("[name=train-destination-placeholder]").blur(() => {
         $(".destination-picker[target=destination]").addClass("invisible");
     }, 500);
 });
+
+/* Hotel aditional */
+$("[name=place-placeholder]").blur(() => {
+    $("[name=place-placeholder]").val("Jakarta");
+    $("[name=place]").val("8691");
+    setTimeout(() => {
+        $(".place-picker[target=place]").addClass("invisible");
+    }, 500);
+});
+
+$("[name=place-placeholder]").keyup((e) => searchCity(e, "place"));
+/* EOL */
 
 /* bus aditional */
 $("[name=bus-origin]").blur(() => {
@@ -1180,7 +1211,6 @@ $("[name=bus-destination]").keyup((e) => searchBusRoute(e, "bus-destination"));
 /* Hotel */
 
 initialChild();
-
 
 $(document).on("click", ".child-increment", function (e) {
     e.preventDefault();
@@ -1237,7 +1267,7 @@ $(document).on("click", ".child-decrement", function (e) {
 
     textArr[1] = `${totalChild} Anak`;
     $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
-    console.log(totalChild);
+
     if (currValue < 1) {
         $(this).prop("disabled", true);
         $(this).parent().parent().siblings(".text-child").text("");

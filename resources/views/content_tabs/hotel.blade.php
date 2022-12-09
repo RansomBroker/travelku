@@ -16,9 +16,10 @@
                             <label class="form-label">Tujuan</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class="fas fa-map-marker-alt"></i></div>
-                                <input type="text" name="place-placeholder" class="form-control border-0 bg-white" placeholder="Mau nginep ke mana ?">
-                                <input type="hidden" value="CGK" name="place">
-                                <div target="place" class="place-picker mt-1 bg-white position-absolute border invisible">
+                                <input id="place-input" type="text" name="place-placeholder" class="form-control border-0 bg-white" value="Jakarta">
+                                <input type="hidden" value="8691" name="place">
+                                <div target="place"
+                                     class="place-picker mt-1 bg-white position-absolute border invisible">
                                     <ul class="list-unstyled m-0">
                                     </ul>
                                 </div>
@@ -28,28 +29,32 @@
                             <label class="form-label">Check In</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class="fas fa-calendar-minus"></i></div>
-                                <input type="date" name="check-in" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}" class="form-control border-0 bg-white">
+                                <input type="date" name="check-in" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}"
+                                       class="form-control border-0 bg-white">
                             </div>
                         </div>
                         <div class="col-6 col-lg-2 ps-0 border-end">
                             <label class="form-label">Check Out</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class="fas fa-calendar-minus"></i></div>
-                                <input type="date" name="check-out" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}" class="form-control border-0 bg-white">
+                                <input type="date" name="check-out" min="{{ date('Y-m-d') }}"
+                                       value="{{ date('Y-m-d') }}" class="form-control border-0 bg-white">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 position-relative">
                             <label class="form-label">Kamar & Anak</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class='bx bx-door-open'></i></div>
-                                <input type="text" id="room-request" class="form-control border-0 bg-white" value="1 Kamar, 0 Anak" name="room-req-placeholder" readonly>
+                                <input type="text" id="room-request" class="form-control border-0 bg-white"
+                                       value="1 Kamar, 0 Anak" name="room-req-placeholder" readonly>
                             </div>
-                            <div class="w-100 position-absolute z-index-4 bg-white mt-2 px-3 py-2 border" style="visibility: hidden"
-                                 id="selector-hotel" >
+                            <div class="w-100 position-absolute z-index-4 bg-white mt-2 px-3 py-2 border"
+                                 style="visibility: hidden"
+                                 id="selector-hotel">
                                 <div
                                     class="d-flex flex-wrap align-items-center justify-content-between mb-2 mt-3 bg-white">
                                     <div class="d-flex align-items-center me-5 mb-2">
-                                        <i class='bx bxs-bed' ></i>
+                                        <i class='bx bxs-bed'></i>
                                         <small>Kamar</small>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
@@ -67,7 +72,8 @@
                                 </div>
                                 <div class="text-start text-lg-end w-100">
                                     <button id="done-room-request"
-                                            class="btn btn-info btn-sm mt-1 mb-3">Done</button>
+                                            class="btn btn-info btn-sm mt-1 mb-3">Done
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +90,9 @@
                             <button class="btn btn-lg btn-info mt-4"><i class="bx bx-search"></i>Cari Hotel</button>
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-info h-100 w-100 mt-4 mt-lg-0 d-block d-lg-none"><i class="bx bx-search"></i>Cari Hotel</button>
+                    <button class="btn btn-lg btn-info h-100 w-100 mt-4 mt-lg-0 d-block d-lg-none"><i
+                            class="bx bx-search"></i>Cari Hotel
+                    </button>
                 </form>
             </div>
         </div>
