@@ -37,16 +37,16 @@
                             <label class="form-label">Check Out</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class="fas fa-calendar-minus"></i></div>
-                                <input type="date" name="check-out" min="{{ date('Y-m-d') }}"
-                                       value="{{ date('Y-m-d') }}" class="form-control border-0 bg-white">
+                                <input type="date" name="check-out" min="{{date('Y-m-d', strtotime('+1 days')) }}"
+                                       value="{{date('Y-m-d', strtotime('+1 days')) }}" class="form-control border-0 bg-white">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 position-relative">
-                            <label class="form-label">Kamar & Anak</label>
+                            <label class="form-label">Kamar</label>
                             <div class="input-group">
                                 <div class="input-group-text border-0"><i class='bx bx-door-open'></i></div>
                                 <input type="text" id="room-request" class="form-control border-0 bg-white"
-                                       value="1 Kamar, 0 Anak" name="room-req-placeholder" readonly>
+                                       value="1 Kamar" name="room-req-placeholder" readonly>
                             </div>
                             <div class="w-100 position-absolute z-index-4 bg-white mt-2 px-3 py-2 border"
                                  style="visibility: hidden"
@@ -79,11 +79,7 @@
                         </div>
 
                         <input type="hidden" name="room-count" value="1">
-                        <input type="hidden" name="total-child" value="0">
 
-                        <div class="m-0 none" id="form-child-req">
-
-                        </div>
                     </div>
                     <div class="mt-2 row">
                         <div class="col-lg-12 text-end form-group d-none d-lg-block">

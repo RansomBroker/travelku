@@ -451,6 +451,12 @@ class Api extends Controller
     /* EOL */
 
     /* Hotel */
+    public function hotel_search(Request $request)
+    {
+        $darmawisata = new Darmawisata();
+        return $darmawisata->hotelSearch($request);
+    }
+
     public function search_city($keyword)
     {
         $cities = City::where('country_id', '=', 96)

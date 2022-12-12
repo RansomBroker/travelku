@@ -615,24 +615,18 @@ const roomRequestIncrement = (e) => {
     e.preventDefault();
     let currValue = parseInt($("[name=room-count]").val());
     let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
     let target = e.currentTarget.getAttribute("target");
     currValue++;
 
     // set text on array
-    textArr[0] = `${currValue} Kamar`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
     if (currValue > 1) {
         $(".decrement-room").prop("disabled", false);
-    }
-
-    $(`[name=${target}]`).val(currValue);
-    $("#counter-room-count").text(currValue);
-
-    if (currValue > 1) {
         roomDetailForm(currValue);
     }
-    /* append new view */
+
+    $("[name=room-req-placeholder]").val(currValue + " Kamar");
+    $(`[name=${target}]`).val(currValue);
+    $("#counter-room-count").text(currValue);
 };
 
 const roomRequestDecrement = (e) => {
@@ -640,14 +634,11 @@ const roomRequestDecrement = (e) => {
     let currValue = parseInt($("[name=room-count]").val());
     let target = e.currentTarget.getAttribute("target");
     let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
     /* remove item*/
     $("#room-" + currValue).remove();
     currValue--;
 
-    /*set val*/
-    textArr[0] = `${currValue} Kamar`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
+    $("[name=room-req-placeholder]").val(currValue + " Kamar");
 
     if (currValue <= 1) {
         $(".decrement-room").prop("disabled", true);
@@ -675,54 +666,9 @@ const roomDetailForm = (currValue) => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="m-0" id="child-request-${currValue}">
-                                        </div>
                                     </div>`;
 
     $("#room-detail-list").append(html);
-    childRequest(currValue);
-};
-
-const childRequest = (currValue) => {
-    let html = `
-        <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
-                                            <div class="d-flex align-items-center me-5 mb-2">
-                                                <i class="bx bx-user-pin"></i>
-                                                <small>Anak</small>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-2">
-                                                <button target="child-req-room-${currValue}"
-                                                        class="child-decrement btn btn-outline-info btn-xs" disabled><i
-                                                        class="bx bx-minus"></i></button>
-                                                <h6 id="counter-children-${currValue}" class="child-counter-text-val m-0 text-center" style="width: 30px">0
-                                                </h6>
-                                                <button target="child-req-room-${currValue}"
-                                                        class="child-increment btn btn-outline-info btn-xs"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <small class="text-child"></small>
-                                        <div class="child-age-container row justify-content-start px-3 gap-2" id="child-age-select-${currValue}">
-
-                                        </div>
-    `;
-    $("#child-request-" + currValue).append(html);
-    let inputHtml = `<input type="hidden" name="child-req-room-${currValue}" value="0">`;
-    $("#form-child-req").append(inputHtml);
-};
-
-const childAgeSelectView = (currValue, parent) => {
-    let html = `<div class="col-5 border rounded p-2" id="age-selector-${currValue}">
-                                                <label class="form-label">Anak Ke-${currValue}</label>
-                                                <select class="form-select form-control-sm" name="${parent}-room[]">
-                                                    <option value="0" selected><1 Tahun</option>
-                                                    <option value="1">1 Tahun</option>
-                                                    <option value="2">2 Tahun</option>
-                                                </select>
-                                            </div>
-                                        `;
-
-    $(`#${parent}`).append(html);
 };
 
 /* show selector sabre */
@@ -972,7 +918,7 @@ const searchCity = async (e, target) => {
     data.forEach((item) => {
         html += `
 		<li code="${item.city_id}" text="${item.city_name}">
-			<h6 class="mb-1">${item.city_name}</h6>
+			<h6 class="m-3">${item.city_name}</h6>
 		</li>
 		`;
     });
@@ -1211,71 +1157,6 @@ $("[name=bus-destination]").keyup((e) => searchBusRoute(e, "bus-destination"));
 /* Hotel */
 
 initialChild();
-
-$(document).on("click", ".child-increment", function (e) {
-    e.preventDefault();
-    let target = e.currentTarget.getAttribute("target");
-    let currValue = parseInt($(`[name=${target}]`).val());
-    let totalChild = parseInt($("[name=total-child]").val());
-    let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
-    let childAgeContainerID = $(this)
-        .parent()
-        .parent()
-        .siblings(".child-age-container")
-        .attr("id");
-    totalChild++;
-    currValue++;
-
-    textArr[1] = `${totalChild} Anak`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
-
-    if (currValue == 1) {
-        $(this).siblings(".child-decrement").prop("disabled", false);
-        $(this)
-            .parent()
-            .parent()
-            .siblings(".text-child")
-            .text("Tambahkan umur anak");
-    }
-
-    childAgeSelectView(currValue, childAgeContainerID);
-    $("[name=total-child]").val(totalChild);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-});
-
-$(document).on("click", ".child-decrement", function (e) {
-    e.preventDefault();
-    let target = e.currentTarget.getAttribute("target");
-    let currValue = parseInt($(`[name=${target}]`).val());
-
-    let totalChild = parseInt($("[name=total-child]").val());
-    let roomText = $("[name=room-req-placeholder]").val();
-
-    let textArr = roomText.split(",");
-    let parentContainer = $(this)
-        .parent()
-        .parent()
-        .siblings(".child-age-container")
-        .attr("id");
-    $(`#${parentContainer} #age-selector-${currValue}`).remove();
-    totalChild--;
-    currValue--;
-
-    textArr[1] = `${totalChild} Anak`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
-
-    if (currValue < 1) {
-        $(this).prop("disabled", true);
-        $(this).parent().parent().siblings(".text-child").text("");
-    }
-    $("[name=total-child]").val(totalChild);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-});
 
 /* EOL */
 slideShow();
