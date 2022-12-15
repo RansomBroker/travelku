@@ -15,38 +15,44 @@ class Darmawisata
     public function __construct()
     {
         $module = Modules::getDarmawisataKey();
-        $this->username =  $module->username;
+        $this->username = $module->username;
         $this->password = $module->password;
     }
+
+    public function topUpProduct()
+    {
+        $data = [
+            'userID' => $this->username,
+            'accessToken' => $this->getAccessToken()->accessToken
+        ];
+
+        $response = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/TopUp/ProductType',
+            $data
+        );
+
+        return $response->json();
+    }
+
+    /* top up */
 
     public function getAccessToken(): object
     {
         $date = Carbon::now()->format("Y-m-d\TH:i:s");
         $data = [
             'token' => $date,
-            'securityCode' => md5($date.md5($this->password)),
+            'securityCode' => md5($date . md5($this->password)),
             'language' => 1,
             'userID' => $this->username
         ];
 
         // make auth to Darmawisata
-        $response = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/h2h/Session/Login', $data);
+        $response = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/h2h/Session/Login',
+            $data
+        );
 
         return $response->object();
-    }
-
-    /* top up */
-    public function topUpProduct()
-    {
-        $data = [
-            'userID' =>$this->username,
-            'accessToken' => $this->getAccessToken()->accessToken
-        ];
-
-        $response = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/TopUp/ProductType', $data);
-
-        return $response->json();
-
     }
 
     public function getProductProviderList($data)
@@ -57,7 +63,10 @@ class Darmawisata
             'accessToken' => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/TopUp/Provider', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/TopUp/Provider',
+            $data
+        );
 
         $response = $request->object();
 
@@ -70,7 +79,6 @@ class Darmawisata
             'respMessage' => $response->respMessage
         ];
         return $dataResp;
-
     }
 
     public function getTopupProductList($data)
@@ -81,27 +89,28 @@ class Darmawisata
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $response = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/TopUp/Product', $data);
+        $response = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/TopUp/Product',
+            $data
+        );
 
         return $response->json();
-
-
     }
     /* top up end*/
 
     /* PPOB */
     public function ppobProduct()
     {
-            $data = [
-                'userID' =>$this->username,
-                'accessToken' => $this->getAccessToken()->accessToken
-            ];
+        $data = [
+            'userID' => $this->username,
+            'accessToken' => $this->getAccessToken()->accessToken
+        ];
 
-            $response = Http::withoutVerifying()->withHeaders([
-                'Content-Type' => 'application/json',
-            ])->accept('application/json')->post('https://61.8.74.42:7080/H2H/PPOB/ProductGroup', $data);
+        $response = Http::withoutVerifying()->withHeaders([
+            'Content-Type' => 'application/json',
+        ])->accept('application/json')->post('https://61.8.74.42:7080/H2H/PPOB/ProductGroup', $data);
 
-            return $response->json();
+        return $response->json();
     }
 
     public function getPpobProductList($data)
@@ -112,7 +121,10 @@ class Darmawisata
             'accessToken' => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/PPOB/Product', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/PPOB/Product',
+            $data
+        );
 
         $response = $request->object();
 
@@ -139,12 +151,15 @@ class Darmawisata
             "departDate" => $data['departure'],
             "paxAdult" => $data['passenger'],
             "paxChild" => 0,
-            "paxInfant"=> 0,
+            "paxInfant" => 0,
             "userID" => $this->username,
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Bus/Schedule', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Bus/Schedule',
+            $data
+        );
 
         $response = $request->json();
 
@@ -156,12 +171,11 @@ class Darmawisata
                 $routes['routes'] = $tmp;
                 $response['schedules'][$key]['routes'] = $routes['routes'];
             }
-
         }
 
         $data = [
             "bus" => $response['bus'],
-            "originTerminal" =>  $response['originTerminal'],
+            "originTerminal" => $response['originTerminal'],
             "destinationTerminal" => $response['destinationTerminal'],
             "departDate" => $response['departDate'],
             "paxAdult" => $response['paxAdult'],
@@ -184,7 +198,10 @@ class Darmawisata
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Bus/Route', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Bus/Route',
+            $data
+        );
 
         $response = $request->json();
 
@@ -193,21 +210,24 @@ class Darmawisata
     /* EOL */
 
     /* Train */
-    public function trainSchedule( $data )
+    public function trainSchedule($data)
     {
         $data = [
-            "trainID"=> "KAI",
-            "paxAdult"=> $data['adult'],
-            "paxChild"=> $data['children'],
-            "paxInfant"=> $data['infant'],
-            "departDate"=> $data['departure'],
-            "origin"=> $data['train-origin'],
-            "destination"=> $data['train-destination'],
-            "userID"=> $this->username,
-            "accessToken"=> $this->getAccessToken()->accessToken
+            "trainID" => "KAI",
+            "paxAdult" => $data['adult'],
+            "paxChild" => $data['children'],
+            "paxInfant" => $data['infant'],
+            "departDate" => $data['departure'],
+            "origin" => $data['train-origin'],
+            "destination" => $data['train-destination'],
+            "userID" => $this->username,
+            "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Train/Schedule', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Train/Schedule',
+            $data
+        );
 
         $response = $request->json();
 
@@ -222,7 +242,10 @@ class Darmawisata
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Train/Route', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Train/Route',
+            $data
+        );
 
         $response = $request->json();
 
@@ -234,20 +257,20 @@ class Darmawisata
     public function scheduleAllAirline($data)
     {
         $data = [
-            "tripType"=> $data->tripType,
-            "origin"=> $data->origin,
-            "destination"=> $data->destination,
-            "departDate"=> $data->departure,
-            "returnDate"=> $data->return,
-            "paxAdult"=> $data->adult,
-            "paxChild"=> $data->child,
-            "paxInfant"=> $data->infant,
-            "promoCode"=> null,
-            "airlineAccessCode"=> null,
-            "cacheType"=> 2 ,
-            "isShowEachAirline"=> false,
-            "userID"=> $this->username,
-            "accessToken"=> $this->getAccessToken()->accessToken
+            "tripType" => $data->tripType,
+            "origin" => $data->origin,
+            "destination" => $data->destination,
+            "departDate" => $data->departure,
+            "returnDate" => $data->return,
+            "paxAdult" => $data->adult,
+            "paxChild" => $data->child,
+            "paxInfant" => $data->infant,
+            "promoCode" => null,
+            "airlineAccessCode" => null,
+            "cacheType" => 2,
+            "isShowEachAirline" => false,
+            "userID" => $this->username,
+            "accessToken" => $this->getAccessToken()->accessToken
         ];
 
         $dataAirlineList = [
@@ -255,28 +278,57 @@ class Darmawisata
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $request = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Airline/ScheduleAllAirline', $data);
+        $request = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Airline/ScheduleAllAirline',
+            $data
+        );
 
-        $requestAirlineList = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/h2h/Airline/List', $dataAirlineList);
+        $requestAirlineList = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/h2h/Airline/List',
+            $dataAirlineList
+        );
 
         $response = $request->json();
         $responseAirlineList = $requestAirlineList->json();
 
         $data = [
-            'flight' => isset($response['journeyDepart']) == null ? null : (isset($response['journeyReturn']) ? array_merge($response['journeyDepart'], $response['journeyReturn']) : $response['journeyDepart']),
+            'flight' => isset($response['journeyDepart']) == null ? null : (isset($response['journeyReturn']) ? array_merge(
+                $response['journeyDepart'],
+                $response['journeyReturn']
+            ) : $response['journeyDepart']),
             'respMessage' => $response['respMessage'],
             'status' => $response['status'],
             'airlines' => $responseAirlineList['airlines']
         ];
 
 
-
         return $data;
-
     }
     /* EOL */
 
     /* Hotel */
+    public function hotelSearch($data)
+    {
+        $data = [
+            "paxPassport" => $data['paxPassport'],
+            "countryID" => $data['countryID'],
+            "cityID" => $data['cityID'],
+            "checkInDate" => $data['checkInDate'],
+            "checkOutDate" => $data['checkOutDate'],
+            "roomRequest" => $data['roomRequest'],
+            "userID" => $this->username,
+            "accessToken" => $this->getAccessToken()->accessToken
+        ];
+
+        $response = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Hotel/Search5',
+            $data
+        );
+
+
+        return $response->json();
+    }
+
     public function allCountryAllCity()
     {
         $data = [
@@ -284,7 +336,10 @@ class Darmawisata
             "accessToken" => $this->getAccessToken()->accessToken
         ];
 
-        $response = Http::withoutVerifying()->accept('application/json')->post('https://61.8.74.42:7080/H2H/Hotel/AllCountryAllCity5', $data);
+        $response = Http::withoutVerifying()->accept('application/json')->post(
+            'https://61.8.74.42:7080/H2H/Hotel/AllCountryAllCity5',
+            $data
+        );
 
         return $response->json();
     }

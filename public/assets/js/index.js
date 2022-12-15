@@ -1,7 +1,6 @@
 const slideShow = () => {
     let imageIndex = 0;
     window.setInterval(() => {
-        console.log(imageIndex);
         const array = ["nusped.jpg", "kabah.jpg", "borobudur.jpg", "turki.jpg"];
 
         imageIndex++;
@@ -9,8 +8,6 @@ const slideShow = () => {
         if (imageIndex >= 3) {
             imageIndex = 0;
         }
-
-        console.log(slideShowUrl + "/" + array[imageIndex]);
 
         $("#slideshow")
             .fadeOut(1000, function () {
@@ -85,10 +82,6 @@ $("#switch-train-destination").click((e) => {
         `[name=train-destination-placeholder]`
     ).val();
 
-    console.log("train origin " + origin);
-    console.log("train oritin placeholder" + originPlaceholder);
-    console.log("train destination" + destination);
-    console.log("train destination place" + destinationPlaceholder);
     $(`[name=train-origin]`).val(destination);
     $(`[name=train-origin-placeholder]`).val(destinationPlaceholder);
     $(`[name=train-destination]`).val(origin);
@@ -102,7 +95,6 @@ const increment = (e) => {
     let childval = parseInt($("[name=children]").val());
     let infantval = parseInt($("[name=infant]").val());
     const total = adultval + childval + infantval;
-    console.log(adultval);
     const target = e.currentTarget.getAttribute("target");
     let value = $(`[name=${target}]`).val();
     value++;
@@ -238,7 +230,6 @@ const incrementAmadeus = (e) => {
     adultval = parseInt($("[name=adult-amadeus]").val());
     childval = parseInt($("[name=children-amadeus]").val());
     infantval = parseInt($("[name=infant-amadeus]").val());
-    console.log(adultval);
     $(`#input-passenger-amadeus`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -353,7 +344,7 @@ const incrementDomestic = (e) => {
     adultval = parseInt($("[name=adult-domestic]").val());
     childval = parseInt($("[name=children-domestic]").val());
     infantval = parseInt($("[name=infant-domestic]").val());
-    console.log(adultval);
+
     $(`#input-passenger-domestic`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -453,14 +444,12 @@ const incrementTrain = (e) => {
         $(`.decrement-train[target=${target}]`).prop("disabled", false);
     }
 
-    console.log(target);
     $(`[name=${target}]`).val(value);
     $(`#counter-${target}`).html(value);
 
     adultval = parseInt($("[name=adult-train]").val());
     childval = parseInt($("[name=children-train]").val());
     infantval = parseInt($("[name=infant-train]").val());
-    console.log(adultval);
     $(`#input-passenger-train`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -554,14 +543,13 @@ const incrementBus = (e) => {
         $(`.decrement-bus[target=${target}]`).prop("disabled", false);
     }
 
-    console.log(target);
     $(`[name=${target}]`).val(value);
     $(`#counter-${target}`).html(value);
 
     adultval = parseInt($("[name=adult-bus]").val());
     childval = parseInt($("[name=children-bus]").val());
     infantval = parseInt($("[name=infant-bus]").val());
-    console.log(adultval);
+
     $(`#input-passenger-bus`).val(
         `${adultval + childval + infantval} Passenger`
     );
@@ -627,24 +615,18 @@ const roomRequestIncrement = (e) => {
     e.preventDefault();
     let currValue = parseInt($("[name=room-count]").val());
     let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
     let target = e.currentTarget.getAttribute("target");
     currValue++;
 
     // set text on array
-    textArr[0] = `${currValue} Kamar`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
     if (currValue > 1) {
         $(".decrement-room").prop("disabled", false);
-    }
-
-    $(`[name=${target}]`).val(currValue);
-    $("#counter-room-count").text(currValue);
-
-    if (currValue > 1) {
         roomDetailForm(currValue);
     }
-    /* append new view */
+
+    $("[name=room-req-placeholder]").val(currValue + " Kamar");
+    $(`[name=${target}]`).val(currValue);
+    $("#counter-room-count").text(currValue);
 };
 
 const roomRequestDecrement = (e) => {
@@ -652,14 +634,11 @@ const roomRequestDecrement = (e) => {
     let currValue = parseInt($("[name=room-count]").val());
     let target = e.currentTarget.getAttribute("target");
     let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
     /* remove item*/
     $("#room-" + currValue).remove();
     currValue--;
 
-    /*set val*/
-    textArr[0] = `${currValue} Kamar`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
+    $("[name=room-req-placeholder]").val(currValue + " Kamar");
 
     if (currValue <= 1) {
         $(".decrement-room").prop("disabled", true);
@@ -687,54 +666,9 @@ const roomDetailForm = (currValue) => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="m-0" id="child-request-${currValue}">
-                                        </div>
                                     </div>`;
 
     $("#room-detail-list").append(html);
-    childRequest(currValue);
-};
-
-const childRequest = (currValue) => {
-    let html = `
-        <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
-                                            <div class="d-flex align-items-center me-5 mb-2">
-                                                <i class="bx bx-user-pin"></i>
-                                                <small>Anak</small>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-2">
-                                                <button target="child-req-room-${currValue}"
-                                                        class="child-decrement btn btn-outline-info btn-xs" disabled><i
-                                                        class="bx bx-minus"></i></button>
-                                                <h6 id="counter-children-${currValue}" class="child-counter-text-val m-0 text-center" style="width: 30px">0
-                                                </h6>
-                                                <button target="child-req-room-${currValue}"
-                                                        class="child-increment btn btn-outline-info btn-xs"><i
-                                                        class="bx bx-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <small class="text-child"></small>
-                                        <div class="child-age-container row justify-content-start px-3 gap-2" id="child-age-select-${currValue}">
-
-                                        </div>
-    `;
-    $("#child-request-" + currValue).append(html);
-    let inputHtml = `<input type="hidden" name="child-req-room-${currValue}" value="0">`;
-    $("#form-child-req").append(inputHtml);
-};
-
-const childAgeSelectView = (currValue, parent) => {
-    let html = `<div class="col-5 border rounded p-2" id="age-selector-${currValue}">
-                                                <label class="form-label">Anak Ke-${currValue}</label>
-                                                <select class="form-select form-control-sm" name="${parent}-room[]">
-                                                    <option value="0" selected><1 Tahun</option>
-                                                    <option value="1">1 Tahun</option>
-                                                    <option value="2">2 Tahun</option>
-                                                </select>
-                                            </div>
-                                        `;
-
-    $(`#${parent}`).append(html);
 };
 
 /* show selector sabre */
@@ -770,7 +704,6 @@ const showSelectorBus = () => {
 
 /* show selector bus */
 const showSelectorHotel = (e) => {
-    console.log("heloo too");
     e.preventDefault();
     $("#selector-hotel").css("visibility", "visible");
 };
@@ -813,7 +746,6 @@ const hideSelectorBus = (e) => {
 
 /* hide selector hotel*/
 const hideSelectorHotel = (e) => {
-    console.log("Hello");
     e.preventDefault();
     $("#selector-hotel").css("visibility", "hidden");
 };
@@ -904,7 +836,6 @@ const searchBusRoute = async (e, target) => {
     const data = await request.json();
     let html = ``;
 
-    console.log(data.length);
     if (data.length == 0) {
         if (!$(`.${target}-picker`).hasClass("invisible")) {
             $(`.${target}-picker`).addClass("invisible");
@@ -918,7 +849,7 @@ const searchBusRoute = async (e, target) => {
     data.forEach((item) => {
         html += `
 		<li code="${item.terminal}" text="${item.terminal}">
-			<h6 class="mb-1">${item.province}, ${item.terminal}</h6>
+			<h6 class="m-3">${item.province}, ${item.terminal}</h6>
 		</li>
 		`;
     });
@@ -938,7 +869,6 @@ const searchStation = async (e, target) => {
     const data = await response.json();
     let html = ``;
 
-    console.log(data);
     if (data.length == 0) {
         if (!$(`.${target}-picker`).hasClass("invisible")) {
             $(`.${target}-picker`).addClass("invisible");
@@ -970,7 +900,38 @@ const searchStation = async (e, target) => {
 };
 
 const searchCity = async (e, target) => {
+    const url = location.origin + "/api/hotel/city/search";
+    const response = await fetch(`${url}/${e.currentTarget.value}`);
+    const data = await response.json();
+    let html = ``;
 
+    if (data.length == 0) {
+        if (!$(`.${target}-picker`).hasClass("invisible")) {
+            $(`.${target}-picker`).addClass("invisible");
+        }
+    } else {
+        if ($(`.${target}-picker`).hasClass("invisible")) {
+            $(`.${target}-picker`).removeClass("invisible");
+        }
+    }
+
+    data.forEach((item) => {
+        html += `
+		<li code="${item.city_id}" text="${item.city_name}">
+			<h6 class="m-3">${item.city_name}</h6>
+		</li>
+		`;
+    });
+
+    $(`.${target}-picker ul`).html(html);
+
+    $(`.${target}-picker li`).click((e) => {
+        const code = e.currentTarget.getAttribute("code");
+        const text = e.currentTarget.getAttribute("text");
+        $(`[name=${target}]`).val(code);
+        $(`[name=${target}-placeholder]`).val(text);
+        $(`.${target}-picker`).addClass("invisible");
+    });
 };
 
 /* sabre-handle */
@@ -1142,6 +1103,10 @@ $("#bus-destination").focus(function () {
     $(this).val("");
 });
 
+$("#place-input").focus(function () {
+    $(this).val("");
+});
+
 /* train aditional */
 $("[name=train-origin-placeholder]").blur(() => {
     $("[name=train-origin-placeholder]").val("Jakarta, Gambir (GMR)");
@@ -1158,6 +1123,18 @@ $("[name=train-destination-placeholder]").blur(() => {
         $(".destination-picker[target=destination]").addClass("invisible");
     }, 500);
 });
+
+/* Hotel aditional */
+$("[name=place-placeholder]").blur(() => {
+    $("[name=place-placeholder]").val("Jakarta");
+    $("[name=place]").val("8691");
+    setTimeout(() => {
+        $(".place-picker[target=place]").addClass("invisible");
+    }, 500);
+});
+
+$("[name=place-placeholder]").keyup((e) => searchCity(e, "place"));
+/* EOL */
 
 /* bus aditional */
 $("[name=bus-origin]").blur(() => {
@@ -1180,72 +1157,6 @@ $("[name=bus-destination]").keyup((e) => searchBusRoute(e, "bus-destination"));
 /* Hotel */
 
 initialChild();
-
-
-$(document).on("click", ".child-increment", function (e) {
-    e.preventDefault();
-    let target = e.currentTarget.getAttribute("target");
-    let currValue = parseInt($(`[name=${target}]`).val());
-    let totalChild = parseInt($("[name=total-child]").val());
-    let roomText = $("[name=room-req-placeholder]").val();
-    let textArr = roomText.split(",");
-    let childAgeContainerID = $(this)
-        .parent()
-        .parent()
-        .siblings(".child-age-container")
-        .attr("id");
-    totalChild++;
-    currValue++;
-
-    textArr[1] = `${totalChild} Anak`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
-
-    if (currValue == 1) {
-        $(this).siblings(".child-decrement").prop("disabled", false);
-        $(this)
-            .parent()
-            .parent()
-            .siblings(".text-child")
-            .text("Tambahkan umur anak");
-    }
-
-    childAgeSelectView(currValue, childAgeContainerID);
-    $("[name=total-child]").val(totalChild);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-});
-
-$(document).on("click", ".child-decrement", function (e) {
-    e.preventDefault();
-    let target = e.currentTarget.getAttribute("target");
-    let currValue = parseInt($(`[name=${target}]`).val());
-
-    let totalChild = parseInt($("[name=total-child]").val());
-    let roomText = $("[name=room-req-placeholder]").val();
-
-    let textArr = roomText.split(",");
-    let parentContainer = $(this)
-        .parent()
-        .parent()
-        .siblings(".child-age-container")
-        .attr("id");
-    $(`#${parentContainer} #age-selector-${currValue}`).remove();
-    totalChild--;
-    currValue--;
-
-    textArr[1] = `${totalChild} Anak`;
-    $("[name=room-req-placeholder]").val(textArr[0] + ", " + textArr[1].trim());
-    console.log(totalChild);
-    if (currValue < 1) {
-        $(this).prop("disabled", true);
-        $(this).parent().parent().siblings(".text-child").text("");
-    }
-    $("[name=total-child]").val(totalChild);
-    $(`[name=${target}]`).val(currValue);
-    $(this).siblings(".child-counter-text-val").text(currValue);
-});
 
 /* EOL */
 slideShow();

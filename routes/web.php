@@ -32,6 +32,8 @@ Route::post('api/train/schedule', [Api::class, 'train_schedule']);
 
 Route::post('api/flight/scheduleAllAirline', [Api::class, 'schedule_all_airline']);
 
+Route::post('api/hotel/search', [Api::class, 'hotel_search']);
+
 Route::get('api/train/route/{keyword}', [Api::class, 'train_route']);
 Route::get('api/bus/route/{keyword}', [Api::class, 'bus_route']);
 Route::get('api/hotel/city/search/{keyword}', [Api::class, 'search_city']);

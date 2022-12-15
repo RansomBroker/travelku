@@ -31,7 +31,7 @@
                             <h4 class="text-white mb-1 px-3 mb-5">Mirror GDS System.</h4>
                             <ul class="nav nav-pills px-2 headerIcon" id="pills-tab" role="tablist">
                                 <li class="nav-item " role="presentation">
-                                    <div class="tabWrapper d-flex flex-column justify-content-center align-items-center" id="pills-pesawat-tab" data-bs-toggle="pill"
+                                    <div class="tabWrapper active d-flex flex-column justify-content-center align-items-center" id="pills-pesawat-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-pesawat"  role="tab" aria-controls="pills-pesawat" aria-selected="true">
                                         <img
                                             src="{{ asset('assets/img/pesawat.png') }}" width="45"
@@ -49,8 +49,8 @@
                                         <span>Umrah</span>
                                     </div>
                                 </li>
-                                <li class="nav-item active" role="presentation">
-                                    <div class="tabWrapper active d-flex flex-column justify-content-center align-items-center" id="pills-hotel-tab" data-bs-toggle="pill"
+                                <li class="nav-item" role="presentation">
+                                    <div class="tabWrapper  d-flex flex-column justify-content-center align-items-center" id="pills-hotel-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-hotel" role="tab"
                                         aria-controls="pills-hotel" aria-selected="false"><img
                                             src="{{ asset('assets/img/hotel.png') }}" width="45"
@@ -86,14 +86,14 @@
                         </div>
 
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade " id="pills-pesawat" role="tabpanel"
+                            <div class="tab-pane fade show active" id="pills-pesawat" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
                                 @include('content_tabs.pesawat')
                             </div>
                             <div class="tab-pane fade" id="pills-umrah" role="tabpanel"
                                  aria-labelledby="pills-home-tab">
                             </div>
-                            <div class="tab-pane fade show active" id="pills-hotel" role="tabpanel" aria-labelledby="pills-home-tab ">
+                            <div class="tab-pane fade" id="pills-hotel" role="tabpanel" aria-labelledby="pills-home-tab ">
                                 @include('content_tabs.hotel')
                             </div>
                             <div class="tab-pane fade" id="pills-kereta" role="tabpanel" aria-labelledby="pills-home-tab">

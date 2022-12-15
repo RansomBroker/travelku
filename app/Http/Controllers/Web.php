@@ -199,31 +199,7 @@ class Web extends Controller
     /* Hotel */
     public function hotel_search()
     {
-        /*$totalRoom = $_GET['room-count'];
-        $checkIn = $_GET['check-in'];
-        $checkOut = $_GET['check-out'];
-
-        $roomRequest = [];
-        for ($i = 1; $i <= $totalRoom; $i++) {
-            $data = [];
-            $childAges = [0];
-
-            if ($_GET['child-req-room-'.$i] != 0) {
-                $childAges = [];
-                foreach ($_GET['child-age-select-'.$i.'-room'] as $value) {
-                    $childAges[] = $value;
-                }
-            }
-
-            $roomRequest[] = [
-                "roomType" => $_GET['room-type-'.$i],
-                "isRequestChildBed" => $_GET['child-req-room-'.$i] == 0 ? "false" : "true",
-                "childNum" => $_GET['child-req-room-'.$i] == 0 ? 0 : $_GET['child-req-room-'.$i],
-                "childAges" => $childAges
-            ];
-        }
-        print_r($roomRequest);
-        dd($_GET);*/
+        return view('hotel/search');
     }
     /* EOL */
 }

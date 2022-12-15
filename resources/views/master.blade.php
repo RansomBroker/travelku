@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/datatables.checkboxes.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.bootstrap5.css') }}" />
       <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+      <link rel="stylesheet" href="https://pagination.js.org/dist/2.4.2/pagination.css">
 
 
       <!-- Page CSS -->

@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Travelku - Hasil Pencarian Bus')
+@section('title', 'Travelku - Hasil Pencarian Kereta')
 
 
 @section('custom-css')
