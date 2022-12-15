@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Terminal;
+use App\Models\Type;
 use Illuminate\Support\Facades\DB;
 use App\Models\Airport;
 use App\Models\Province;
@@ -196,8 +197,11 @@ class Api extends Controller
 
             array_push($data->data->travelers, $o);
         }
-
+        $userId = Auth::id();
+        $type = Type::where('name', 'flight')->first();
         $booking = new Booking();
+        $booking->user_id = $userId;
+        $booking->type_id = $type->type_id;
         $booking->order_id = $id;
         $booking->snap_token = $snapToken;
         $booking->data = base64_encode(json_encode($data));
