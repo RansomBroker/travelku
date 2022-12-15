@@ -191,7 +191,6 @@ const showScheduleHTML = (res) => {
     $("#bus-list-schedules").append(html);
     $(".show-bus-routes").click(function (e) {
         $(this).parent().siblings(".routes-list").toggle("slow");
-        console.log("hey i got clicked");
     });
 };
 

@@ -849,7 +849,7 @@ const searchBusRoute = async (e, target) => {
     data.forEach((item) => {
         html += `
 		<li code="${item.terminal}" text="${item.terminal}">
-			<h6 class="mb-1">${item.province}, ${item.terminal}</h6>
+			<h6 class="m-3">${item.province}, ${item.terminal}</h6>
 		</li>
 		`;
     });

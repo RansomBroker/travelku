@@ -101,6 +101,14 @@
                     </div>
                 </div>
             </div>
+
+            {{-- hotel list--}}
+            <div class="col-lg-12 col-12  mt-4 p-0" id="hotel-list">
+            </div>
+
+            {{-- hotel pagination --}}
+            <div class="col-lg-12 col-12  mt-4 p-0 hotel-paginate" >
+            </div>
         </div>
 
     </div>
@@ -119,8 +127,8 @@
 @section('custom-js')
 
     @include('components/navbar/js')
-
-    <script src="{{ asset('assets/js/hotel-search.js') }}"></script>
+    <script src="https://pagination.js.org/dist/2.4.2/pagination.min.js"></script>
+    <script type="module" src="{{ asset('assets/js/hotel-search.js') }}"></script>
 
 @endsection
 
