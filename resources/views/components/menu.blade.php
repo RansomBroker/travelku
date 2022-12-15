@@ -3,7 +3,7 @@
   <div class="app-brand demo text-center">
     <a href="{{ URL::to('/') }}" class="app-brand-link">
       <img class="w-75" src="{{ asset('assets/img/logo.png') }}">
-    </a> 
+    </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
       <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -32,6 +32,12 @@
         <div data-i18n="Analytics">Booking</div>
       </a>
     </li>
+      <li class="menu-item {{ strpos(Request::url(), 'add-product') ? 'active' : '' }}">
+          <a href="{{ URL::to('admin/add-product') }}" class="menu-link">
+              <i class='menu-icon bx bx-list-ul'></i>
+              <div data-i18n="Analytics">Add Product</div>
+          </a>
+      </li>
     <li class="menu-item">
       <a href="{{ URL::to('logout') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-log-out"></i>

@@ -202,4 +202,11 @@ class Web extends Controller
         return view('hotel/search');
     }
     /* EOL */
+
+    /* Umroh */
+    public function add_product_view()
+    {
+        return view('admin/add-product');
+    }
+    /* EOL */
 }
