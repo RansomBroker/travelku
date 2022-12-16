@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Lib\Darmawisata;
+use App\Models\Product;
 use App\Models\Terminal;
 use Illuminate\Http\Request;
 use App\Lib\Amadeus;
@@ -12,6 +13,7 @@ use App\Models\Modules;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Validator;
 
 class Web extends Controller
 {
@@ -207,6 +209,46 @@ class Web extends Controller
     public function add_product_view()
     {
         return view('admin/add-product');
+    }
+
+    public function add_product(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'img' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors([
+                'type' => 'This field is required',
+                'title' => 'This field is required',
+                'description' => 'This field is required',
+                'price' => 'This field is required',
+                'img' => 'This field is required',
+            ]);
+        }
+
+        $imageFile = $request->file('img');
+        $imageName = date('Ymdhis') . "_" . $imageFile->getClientOriginalName();
+        $imageFile->move(public_path('assets/img/products'), $imageName);
+        
+        $validator = $validator->safe()->all();
+
+        $product = new Product();
+        $product->product_id = date('ymdhis').rand(10000, 99999);
+        $product->type_id = $validator['type'];
+        $product->title = $validator['title'];
+        $product->description = $validator['description'];
+        $product->price = $validator['price'];
+        $product->duration = $request->duration;
+        $product->thumbnail = $imageName;
+
+        $product->save();
+
+        return redirect()->to('admin/dashboard');
     }
     /* EOL */
 }
