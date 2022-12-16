@@ -239,7 +239,7 @@ class Web extends Controller
         $validator = $validator->safe()->all();
 
         $product = new Product();
-        $product->product_id = date('ymdhis').rand(10000, 99999);
+        $product->product_id = date('ymdhis') . rand(10000, 99999);
         $product->type_id = $validator['type'];
         $product->title = $validator['title'];
         $product->description = $validator['description'];
@@ -255,8 +255,7 @@ class Web extends Controller
     public function admin_product_list_view()
     {
         $product = Product::with('types')->get();
-        dd($product);
-        return view('admin/product-list');
+        return view('admin/product-list', ['products' => $product]);
     }
     /* EOL */
 }
