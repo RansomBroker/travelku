@@ -11,6 +11,7 @@ use App\Lib\Sabre;
 use App\Models\Booking;
 use App\Models\Modules;
 use App\Models\User;
+use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Validator;
@@ -234,7 +235,7 @@ class Web extends Controller
         $imageFile = $request->file('img');
         $imageName = date('Ymdhis') . "_" . $imageFile->getClientOriginalName();
         $imageFile->move(public_path('assets/img/products'), $imageName);
-        
+
         $validator = $validator->safe()->all();
 
         $product = new Product();
@@ -249,6 +250,13 @@ class Web extends Controller
         $product->save();
 
         return redirect()->to('admin/dashboard');
+    }
+
+    public function admin_product_list_view()
+    {
+        $product = Product::with('types')->get();
+        dd($product);
+        return view('admin/product-list');
     }
     /* EOL */
 }
