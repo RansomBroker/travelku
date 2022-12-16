@@ -37,8 +37,8 @@
                                     <td>{{ $product->types->name }}</td>
                                     <td>{{ $product->title }}</td>
                                     <td>Rp.{{ number_format($product->price, 2, ',', '.') }}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary">
+                                    <td class="text-center">
+                                        <a href="{{ URL::to('admin/edit/product/'.$product->id) }}" class="btn btn-primary">
                                             <i class='bx bx-edit-alt'></i>
                                         </a>
                                         <button data-product="{{$product->title}}" data-id="{{$product->id}}"
@@ -60,6 +60,15 @@
 @section('custom-js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
     <script>
+        let deleteProduct =  async (id) => {
+            const URL = window.location.origin + "/admin/delete/product";
+            let request = await fetch(URL+"/"+id);
+            let response = await request.json();
+            if (response === 1) {
+                window.location.reload();
+            }
+        }
+
         $(".btn-delete").click(function(e) {
             Swal.fire({
                 icon: "warning",
@@ -71,9 +80,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     let id = $(this).attr("data-id");
+                    deleteProduct(id);
                 }
             });
         });
+
         $("#table-product").DataTable({ responsive: true });
     </script>
 @endsection

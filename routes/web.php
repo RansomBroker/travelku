@@ -75,6 +75,9 @@ Route::group(['middleware' => 'admin.auth'], function () {
     Route::get('admin/booking', [Web::class, 'admin_booking']);
     Route::get('admin/product-list', [Web::class, 'admin_product_list_view']);
     Route::get('admin/add-product', [Web::class, 'add_product_view']);
+    Route::get('admin/delete/product/{id}', [Web::class, 'delete_product']);
+    Route::get('admin/edit/product/{id}', [Web::class, 'edit_product_view']);
+    Route::post('admin/edit/product/change', [Web::class, 'edit_product']);
     Route::post('admin/add-product/add', [Web::class, 'add_product']);
     Route::post('api/admin/modules/save', [Api::class, 'save_module']);
 });

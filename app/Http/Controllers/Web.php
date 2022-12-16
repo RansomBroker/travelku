@@ -214,7 +214,7 @@ class Web extends Controller
 
     public function add_product(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             'type' => 'required',
             'title' => 'required',
             'description' => 'required',
@@ -222,21 +222,10 @@ class Web extends Controller
             'img' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors([
-                'type' => 'This field is required',
-                'title' => 'This field is required',
-                'description' => 'This field is required',
-                'price' => 'This field is required',
-                'img' => 'This field is required',
-            ]);
-        }
-
         $imageFile = $request->file('img');
         $imageName = date('Ymdhis') . "_" . $imageFile->getClientOriginalName();
         $imageFile->move(public_path('assets/img/products'), $imageName);
 
-        $validator = $validator->safe()->all();
 
         $product = new Product();
         $product->product_id = date('ymdhis') . rand(10000, 99999);
@@ -256,6 +245,49 @@ class Web extends Controller
     {
         $product = Product::with('types')->get();
         return view('admin/product-list', ['products' => $product]);
+    }
+
+    public function delete_product($id)
+    {
+        $product = Product::find($id);
+        return $product->delete();
+    }
+
+    public function edit_product_view($id)
+    {
+        $product = Product::find($id);
+        return view('admin/edit-product', [
+            "product" => $product
+        ]);
+    }
+
+    public function edit_product(Request $request)
+    {
+        $validator = $request->validate([
+            'type' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric'
+        ]);
+
+        $product = Product::find($request->id);
+        $product->type_id = $validator['type'];
+        $product->title = $validator['title'];
+        $product->description = $validator['description'];
+        $product->price = $validator['price'];
+        $product->duration = $request->duration;
+
+
+        if ($request->has('img')) {
+            $imageFile = $request->file('img');
+            $imageName = date('Ymdhis') . "_" . $imageFile->getClientOriginalName();
+            $imageFile->move(public_path('assets/img/products'), $imageName);
+            $product->thumbnail = $imageName;
+        }
+
+        $product->save();
+
+        return redirect()->to('admin/product-list');
     }
     /* EOL */
 }
