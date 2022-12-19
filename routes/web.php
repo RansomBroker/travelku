@@ -44,6 +44,11 @@ Route::get('flight/search-domestic', [Web::class, 'flight_search_domestic']);
 Route::get('hotel/search', [Web::class, 'hotel_search']);
 /* EOL*/
 
+
+/* Umroh */
+Route::get('api/umroh/allUmrohProduct', [Api::class, 'all_product']);
+/* EOL */
+
 Route::get('flight/search', [Web::class, 'flight_search']);
 Route::get('flight/search-sabre', [Web::class, 'flight_search_sabre']);
 // Route::get('flight/search', [Web::class, 'flight_search_sabre'])->name('search_sabre');

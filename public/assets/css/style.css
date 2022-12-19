@@ -500,3 +500,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* EOL */
+
+
+/* service */
+
+.carousel-width {
+    display: block !important;
+    width: 65% !important;
+}
+
+@media (min-width: 576px) {
+    .carousel-width {
+        display: block !important;
+        width: 88% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .carousel-width {
+        display: block !important;
+        width: 93% !important;
+    }
+}
+
+/* EOL */

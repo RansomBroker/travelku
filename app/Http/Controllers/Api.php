@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Product;
 use App\Models\Terminal;
 use App\Models\Type;
 use Illuminate\Support\Facades\DB;
@@ -469,6 +470,14 @@ class Api extends Controller
             ->get();
 
         return response()->json($cities);
+    }
+    /* EOL */
+
+    /* Umroh */
+    public function all_product()
+    {
+        $umroh = Product::where('type_id', 2)->get();
+        return response()->json($umroh);
     }
     /* EOL */
 }

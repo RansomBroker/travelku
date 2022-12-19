@@ -1159,4 +1159,75 @@ $("[name=bus-destination]").keyup((e) => searchBusRoute(e, "bus-destination"));
 initialChild();
 
 /* EOL */
+
+/* Umroh */
+const fetchServiceProduct = async () => {
+    let URL = window.location.origin + "/api/umroh/allUmrohProduct";
+    let request = await fetch(URL);
+
+    let response = await request.json();
+
+    console.log(response);
+    displayServiceHTML(response);
+
+    let owlService = $(".service-slider-area");
+    owlService.owlCarousel({
+        autoplay: true,
+        slideSpeed: 1500,
+        loop: false,
+        items: 4,
+        responsive: {
+            0: {
+                margin: 10,
+                items: 1,
+            },
+            767: {
+                margin: 10,
+                items: 2,
+            },
+            600: {
+                margin: 10,
+                items: 2,
+            },
+            1000: {
+                margin: 10,
+                items: 4,
+            },
+        },
+    });
+};
+
+const displayServiceHTML = (response) => {
+    let html = ``;
+
+    response.forEach(function (product) {
+        html += `<div class="card">
+                <img src="public/assets/img/products/${
+                    product.thumbnail
+                }" class="card-img-top"
+                     alt="ka'bah">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${product.title}</h5>
+                    <a href="#" class="fs-3 text-warning mt-auto">${new Intl.NumberFormat(
+                        "id-ID",
+                        {
+                            style: "currency",
+                            currency: "IDR",
+                            minimumFractionDigits: 2,
+                        }
+                    ).format(product.price)}</a>
+                </div>
+            </div>`;
+    });
+
+    $("#service-product").append(html);
+    $(document).ready(function () {
+        $("#service-product .owl-stage").addClass("d-flex align-items-stretch");
+        $("#service-product .owl-item").addClass("d-flex ");
+        $("#service-product .card").addClass("align-self-stretch");
+    });
+};
+
+fetchServiceProduct();
+/* EOL */
 slideShow();

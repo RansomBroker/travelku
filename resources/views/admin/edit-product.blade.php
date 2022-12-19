@@ -80,7 +80,7 @@
                             @enderror
                         </div>
                         <div class="mt-3 d-flex justify-content-lg-start justify-content-center w-100">
-                            <button class="btn btn-primary">Add new product</button>
+                            <button class="btn btn-primary">Edit product</button>
                         </div>
                         <div class="mt-3 d-flex justify-content-lg-start justify-content-center w-100">
                             <a href="{{ URL::to('admin/product-list') }}" class="btn btn-danger">Cancel Edit</a>
