@@ -15,16 +15,6 @@ class AlterBookingTable extends Migration
     {
         Schema::table('booking', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->change();
-            $table->unsignedBigInteger('type_id')->unsigned()->index()->after('user_id');
-        });
-
-        Schema::table('booking', function (Blueprint $table) {
-            $table
-                ->foreign('type_id')
-                ->references('type_id')
-                ->on('types')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
 
         Schema::table('booking', function (Blueprint $table) {
@@ -44,7 +34,11 @@ class AlterBookingTable extends Migration
      */
     public function down()
     {
-        //
+        // revert all to nothing
+        Schema::table('booking', function(Blueprint $table) {
+            $table->dropForeign('booking_user_id_foreign');
+        });
+
         Schema::disableForeignKeyConstraints();
     }
 }

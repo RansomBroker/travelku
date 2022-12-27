@@ -85,4 +85,10 @@ Route::group(['middleware' => 'admin.auth'], function () {
     Route::post('admin/edit/product/change', [Web::class, 'edit_product']);
     Route::post('admin/add-product/add', [Web::class, 'add_product']);
     Route::post('api/admin/modules/save', [Api::class, 'save_module']);
+
+    // vendor section
+    Route::get('admin/vendor-management', [Web::class, 'vendor_management']);
+
+    // Category section
+    Route::get('admin/type-management', [Web::class, 'type_management']);
 });

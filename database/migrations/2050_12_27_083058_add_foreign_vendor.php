@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterProductsTable extends Migration
+class AddForeignVendor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,19 @@ class AlterProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        //
+        Schema::table('products', function(Blueprint $table) {
+            
             $table
-                ->foreign('type_id')
-                ->references('type_id')
-                ->on('types')
+                ->foreign('vendor_id')
+                ->references('vendor_id')
+                ->on('vendors')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+        
         });
+        
     }
 
     /**
@@ -30,7 +35,9 @@ class AlterProductsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products', function(Blueprint $table){
+            $table->dropForeign('products_vendor_id_foreign');
+        });
         Schema::disableForeignKeyConstraints();
     }
 }

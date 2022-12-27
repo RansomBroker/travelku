@@ -10,7 +10,7 @@ const slideShow = () => {
         }
 
         $("#slideshow")
-            .fadeOut(1000, function () {
+            .fadeOut(1000, function() {
                 $("#slideshow").attr(
                     "src",
                     slideShowUrl + "/" + array[imageIndex]
@@ -1009,101 +1009,101 @@ $("[name=departure]").change(() => {
 });
 
 /* when click input departure hide plane icon*/
-$("#origin").on("focus", function (e) {
+$("#origin").on("focus", function(e) {
     $("#plane-departure-icon").addClass("d-none");
 });
 
-$("#origin").on("focusout", function (e) {
+$("#origin").on("focusout", function(e) {
     $("#plane-departure-icon").removeClass("d-none");
 });
 
 /* when click input arival hide plane icon*/
-$("#destination").on("focus", function (e) {
+$("#destination").on("focus", function(e) {
     $("#plane-arival-icon").addClass("d-none");
 });
 
-$("#destination").on("focusout", function (e) {
+$("#destination").on("focusout", function(e) {
     $("#plane-arrival-icon").removeClass("d-none");
 });
 
 /* when click input amadeus departure hide plane icon*/
-$("#origin-amadeus").on("focus", function (e) {
+$("#origin-amadeus").on("focus", function(e) {
     $("#plane-departure-icon-amadeus").addClass("d-none");
 });
 
-$("#origin-amadeus").on("focusout", function (e) {
+$("#origin-amadeus").on("focusout", function(e) {
     $("#plane-departure-icon-amadeus").removeClass("d-none");
 });
 
 /* when click input aribal hide plane icon*/
-$("#destination-amadeus").on("focus", function (e) {
+$("#destination-amadeus").on("focus", function(e) {
     $("#plane-arrival-icon-amadeus").addClass("d-none");
 });
 
-$("#destination-amadeus").on("focusout", function (e) {
+$("#destination-amadeus").on("focusout", function(e) {
     $("#plane-arrival-icon-amadeus").removeClass("d-none");
 });
 
 /* when click input domestic departure hide plane icon*/
-$("#origin-domestic").on("focus", function (e) {
+$("#origin-domestic").on("focus", function(e) {
     $("#plane-departure-icon-domestic").addClass("d-none");
 });
 
-$("#origin-domestic").on("focusout", function (e) {
+$("#origin-domestic").on("focusout", function(e) {
     $("#plane-departure-icon-domestic").removeClass("d-none");
 });
 
 /* when click input aribal hide plane icon*/
-$("#destination-domestic").on("focus", function (e) {
+$("#destination-domestic").on("focus", function(e) {
     $("#plane-arrival-icon-domestic").addClass("d-none");
 });
 
-$("#destination-domestic").on("focusout", function (e) {
+$("#destination-domestic").on("focusout", function(e) {
     $("#plane-arrival-icon-domestic").removeClass("d-none");
 });
 
 /* clear input value */
-$("#origin").focus(function () {
+$("#origin").focus(function() {
     $(this).val("");
 });
 
-$("#destination").focus(function () {
+$("#destination").focus(function() {
     $(this).val("");
 });
 
-$("#origin-amadeus").focus(function () {
+$("#origin-amadeus").focus(function() {
     $(this).val("");
 });
 
-$("#destination-amadeus").focus(function () {
+$("#destination-amadeus").focus(function() {
     $(this).val("");
 });
 
-$("#origin-domestic").focus(function () {
+$("#origin-domestic").focus(function() {
     $(this).val("");
 });
 
-$("#destination-domestic").focus(function () {
+$("#destination-domestic").focus(function() {
     $(this).val("");
 });
 
-$("#train-origin").focus(function () {
+$("#train-origin").focus(function() {
     $(this).val("");
 });
 
-$("#train-destination").focus(function () {
+$("#train-destination").focus(function() {
     $(this).val("");
 });
 
-$("#bus-origin").focus(function () {
+$("#bus-origin").focus(function() {
     $(this).val("");
 });
 
-$("#bus-destination").focus(function () {
+$("#bus-destination").focus(function() {
     $(this).val("");
 });
 
-$("#place-input").focus(function () {
+$("#place-input").focus(function() {
     $(this).val("");
 });
 
@@ -1179,49 +1179,50 @@ const fetchServiceProduct = async () => {
         responsive: {
             0: {
                 margin: 10,
-                items: 1,
+                items: 1
             },
             767: {
                 margin: 10,
-                items: 2,
+                items: 2
             },
             600: {
                 margin: 10,
-                items: 2,
+                items: 2
             },
             1000: {
                 margin: 10,
-                items: 4,
-            },
-        },
+                items: 4
+            }
+        }
     });
 };
 
 const displayServiceHTML = (response) => {
     let html = ``;
 
-    response.forEach(function (product) {
-        html += `<div class="card">
+    response.forEach(function(product) {
+        html += `<div class="card shadow mb-2">
                 <img src="public/assets/img/products/${
-                    product.thumbnail
-                }" class="card-img-top"
+            product.thumbnail
+        }" class="card-img-top"
                      alt="ka'bah">
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${product.title}</h5>
-                    <a href="#" class="fs-3 text-warning mt-auto">${new Intl.NumberFormat(
-                        "id-ID",
-                        {
-                            style: "currency",
-                            currency: "IDR",
-                            minimumFractionDigits: 2,
-                        }
-                    ).format(product.price)}</a>
+                    <h6 class="card-title">${product.title} </h6>
+                    <span class="text-muted mt-auto">Durasi ${product.duration} Hari</span>
+                    <a href="#" class="text-warning m-0">${new Intl.NumberFormat(
+            "id-ID",
+            {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 2
+            }
+        ).format(product.price)}</a>
                 </div>
             </div>`;
     });
 
     $("#service-product").append(html);
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#service-product .owl-stage").addClass("d-flex align-items-stretch");
         $("#service-product .owl-item").addClass("d-flex ");
         $("#service-product .card").addClass("align-self-stretch");

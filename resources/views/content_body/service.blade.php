@@ -28,6 +28,11 @@
 
 <section id="service_area">
     <div class="container-fluid">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         <div class=" p-1 service-slider-area owl-carousel" id="service-product">
         </div>
         <nav aria-label="Page navigation example">

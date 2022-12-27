@@ -44,6 +44,19 @@
                 <div data-i18n="Analytics">Add Product</div>
             </a>
         </li>
+        <li class="menu-item {{ strpos(Request::url(), 'vendor-management') ? 'active' : '' }}">
+            <a href="{{ URL::to('admin/vendor-management') }}" class="menu-link">
+                <i class='menu-icon bx bx-group'></i>
+                <div data-i18n="Analytics">Vendor Management</div>
+            </a>
+        </li>
+         <li class="menu-item {{ strpos(Request::url(), 'type-management') ? 'active' : '' }}">
+            <a href="{{ URL::to('admin/type-management') }}" class="menu-link">
+                <i class='menu-icon bx bx-category'></i>
+                <div data-i18n="Analytics">Type Management</div>
+            </a>
+        </li>
+
         <li class="menu-item">
             <a href="{{ URL::to('logout') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>

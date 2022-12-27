@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterCitiesTable extends Migration
+class AlterProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class AlterCitiesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('cities', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
+        
+            
             $table
-                ->foreign('country_id')
-                ->references('country_id')
-                ->on('countries')
+                ->foreign('type_id')
+                ->references('type_id')
+                ->on('types')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+    
         });
     }
 
@@ -31,7 +34,9 @@ class AlterCitiesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropForeign('products_type_id_foreign');
+        });
         Schema::disableForeignKeyConstraints();
     }
 }
