@@ -25,6 +25,16 @@ class ModulesSeed extends Seeder
                     'margin' => '700.000',
                     'businessMargin' => '1.000.000'
                 ])
+            ],
+            [
+                "name" => "darmawisata",
+                "type" => "travel",
+                "enable" => true,
+                "data" => json_encode([
+                    'username' => 'EDZ681WZWC',
+                    'password' => 'Darmaj4y4'
+                ])
+
             ]
         ];
 
